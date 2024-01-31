@@ -8,6 +8,27 @@
     <artifactId>java-utils</artifactId>
     <version>0.0.1</version>
     <description>A simple, lightweight and well-tested utility library.</description>
+    <url>https://github.com/amanzat/java-utils</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://github.com/amanzat/java-utils/blob/dev/LICENSE</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>amanzat</id>
+            <name>Adrian Manzat</name>
+            <email>amanzat@gmail.com</email>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:https://github.com/amanzat/java-utils.git</connection>
+        <developerConnection>scm:git:https://github.com/amanzat/java-utils.git</developerConnection>
+        <url>https://github.com/amanzat/java-utils</url>
+        <tag>HEAD</tag>
+    </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,11 +42,13 @@
         <!-- test dependencies -->
         <junit-jupiter.version>5.10.0</junit-jupiter.version>
         <assertj-version>3.24.2</assertj-version>
+        <mockito.version>5.8.0</mockito.version>
 
         <!-- plugins -->
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
         <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
+        <maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
         <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
     </properties>
@@ -43,6 +66,12 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco-maven-plugin.version}</version>
+            </plugin>
+            <!-- javadoc -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin.version}</version>
             </plugin>
         </plugins>
         <!-- maven plugins configurations -->
@@ -79,17 +108,17 @@
                         </execution>
                     </executions>
                 </plugin>
-                <!-- generate the tests jar -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>3.3.0</version>
                     <executions>
-                        <execution>
+                        <!-- uncomment to generate the tests jar -->
+                        <!--execution>
                             <goals>
                                 <goal>test-jar</goal>
                             </goals>
-                        </execution>
+                        </execution-->
                     </executions>
                 </plugin>
                 <!-- unit tests configuration -->
@@ -156,6 +185,29 @@
                         </execution>
                     </executions>
                 </plugin>
+                <!-- javadoc -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${maven-javadoc-plugin.version}</version>
+                    <configuration>
+                        <tags>
+                            <tag>
+                                <name>implNote</name>
+                                <placement>a</placement>
+                                <head>Implementation Note:</head>
+                            </tag>
+                        </tags>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -193,6 +245,11 @@
             <artifactId>assertj-core</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -228,6 +285,12 @@
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
                 <version>${assertj-version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>

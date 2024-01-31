@@ -18,8 +18,14 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class FileUtils {
 
+    /**
+     * The Unix path separator.
+     */
     public static final char UNIX_SEPARATOR = '/';
 
+    /**
+     * The Windows path separator.
+     */
     private static final char WINDOWS_SEPARATOR = '\\';
 
     /**

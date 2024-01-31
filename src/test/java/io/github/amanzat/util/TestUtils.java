@@ -19,8 +19,6 @@ public final class TestUtils {
     public static final String INVALID_STR = "invalid";
     public static final String DIFFERENT_STR = "different";
     public static final String JUST_TESTING_MESSAGE = "just testing...";
-    public static final String DUMMY_STRING = "dummy string";
-    public static final String ABC_STRING = "abc";
     public static final String FOLDER = "my-folder";
     public static final String FILE_NAME = "my-file.txt";
 

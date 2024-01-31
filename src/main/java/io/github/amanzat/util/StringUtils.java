@@ -243,12 +243,18 @@ public final class StringUtils {
      */
     public enum Padding {
 
+        /**
+         * The left padding enum.
+         */
         LEFT {
             @Override
             public String concat(String str, String padStr) {
                 return padStr.concat(str);
             }
         },
+        /**
+         * The right padding enum.
+         */
         RIGHT {
             @Override
             public String concat(String str, String padStr) {
