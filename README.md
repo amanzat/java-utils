@@ -1,6 +1,6 @@
 # java-utils
 
-[![License](https://img.shields.io/github/license/amanzat/java-utils)](https://github.com/amanzat/java-utils/blob/dev/LICENSE.md)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/amanzat/java-utils/blob/dev/LICENSE)
 ___
 A simple, lightweight and well-tested utility library.
 ___
