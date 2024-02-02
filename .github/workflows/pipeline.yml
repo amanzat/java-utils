@@ -18,7 +18,7 @@ on:
       publish_artifacts:
         description: 'Publish artifacts'
         required: true
-        default: 'true'
+        default: 'false'
 
 jobs:
   build:
