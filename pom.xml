@@ -6,7 +6,7 @@
 
     <groupId>io.github.amanzat</groupId>
     <artifactId>java-utils</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3-SNAPSHOT</version>
     <name>java-utils</name>
     <description>A simple, lightweight and well-tested utility library.</description>
     <url>https://github.com/amanzat/java-utils</url>
@@ -33,7 +33,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <maven-compiler.source>${java.version}</maven-compiler.source>
         <maven-compiler.target>${java.version}</maven-compiler.target>
 
