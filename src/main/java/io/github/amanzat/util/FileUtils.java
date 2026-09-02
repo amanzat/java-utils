@@ -47,7 +47,8 @@ public final class FileUtils {
      * @return {@code true} if the directory exists, {@code false} otherwise.
      */
     public static boolean ensureDirectoryExists(String path) {
-        if (!new File(path).exists()) {
+        File directory = new File(path);
+        if (!directory.exists()) {
             try {
                 Path directoryPath = Files.createDirectories(Paths.get(path));
                 logger.info("Directory {} created", path);
@@ -57,7 +58,7 @@ public final class FileUtils {
                 return false;
             }
         }
-        return true;
+        return directory.isDirectory();
     }
 
     /**

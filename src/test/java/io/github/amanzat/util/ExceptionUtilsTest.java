@@ -36,6 +36,11 @@ class ExceptionUtilsTest {
     }
 
     @Test
+    void getCauseNullThrowable() {
+        assertThat(ExceptionUtils.getCause(null)).isNull();
+    }
+
+    @Test
     void getCause() {
         Throwable throwable = mock(Throwable.class);
 

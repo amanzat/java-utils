@@ -43,8 +43,12 @@ public final class ExceptionUtils {
      *
      * @param throwable The throwable
      * @return The cause of this {@link Throwable throwable}.
+     * @implNote A {@code null} throwable has no cause.
      */
     public static Throwable getCause(Throwable throwable) {
+        if (throwable == null) {
+            return null;
+        }
         Throwable cause = throwable.getCause();
         return cause != null && cause != throwable ? cause : null;
     }

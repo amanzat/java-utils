@@ -50,6 +50,9 @@ public final class IOUtils {
      * @throws IOException if an I/O error occurs.
      */
     public static long copy(InputStream inputStream, OutputStream outputStream, int bufferSize) throws IOException {
+        if (bufferSize <= 0) {
+            throw new IllegalArgumentException("The buffer size must be greater than zero.");
+        }
         return copy(inputStream, outputStream, new byte[bufferSize]);
     }
 
@@ -68,6 +71,10 @@ public final class IOUtils {
     public static long copy(InputStream inputStream, OutputStream outputStream, byte[] buffer) throws IOException {
         Objects.requireNonNull(inputStream, "inputStream");
         Objects.requireNonNull(outputStream, "outputStream");
+        Objects.requireNonNull(buffer, "buffer");
+        if (buffer.length == 0) {
+            throw new IllegalArgumentException("The buffer size must be greater than zero.");
+        }
         long count = 0;
         int n;
         while (EOF != (n = inputStream.read(buffer))) {
@@ -83,8 +90,12 @@ public final class IOUtils {
      * @param input   The string to convert
      * @param charset The charset to use, {@code null} allowed and transformed to default charset.
      * @return An input stream.
+     * @implNote A {@code null} input is converted to an empty input stream.
      */
     public static InputStream toInputStream(String input, Charset charset) {
+        if (input == null) {
+            return new ByteArrayInputStream(new byte[0]);
+        }
         return new ByteArrayInputStream(input.getBytes(charset == null ? Charset.defaultCharset() : charset));
     }
 }

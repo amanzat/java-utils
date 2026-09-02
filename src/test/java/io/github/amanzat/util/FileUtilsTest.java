@@ -58,6 +58,17 @@ class FileUtilsTest {
     }
 
     @Test
+    void ensureDirectoryExistsPathIsFile(@TempDir Path tempDir) throws IOException {
+        assertThat(tempDir).exists();
+
+        Path filePath = Files.createFile(tempDir.resolve(FILE_NAME));
+        assertThat(filePath).exists();
+
+        // the path exists but is a regular file, not a directory
+        assertThat(FileUtils.ensureDirectoryExists(filePath.toAbsolutePath().toString())).isFalse();
+    }
+
+    @Test
     void ensureDirectoryExistsInvalidPath(@TempDir Path tempDir) throws IOException {
         assertThat(tempDir).exists();
 

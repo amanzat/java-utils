@@ -46,6 +46,9 @@ public final class CollectionUtils {
      * @see <a href=https://stackoverflow.com/questions/27583623/is-there-an-elegant-way-to-process-a-stream-in-chunks>url</a>
      */
     public static <T> Stream<List<T>> chunkify(Iterator<T> iterator, int size) {
+        if (size <= 0) {
+            throw new IllegalArgumentException("The chunk max size must be greater than zero.");
+        }
         Iterator<List<T>> listIterator = new Iterator<>() {
 
             @Override

@@ -96,6 +96,9 @@ public final class StringUtils {
      * @return The truncated {@link String value} or the original {@link String}.
      */
     public static String truncateWithMarker(String value, int maxLength) {
+        if (maxLength < 0) {
+            throw new IllegalArgumentException("The maximum length can't be negative.");
+        }
         if (isBlank(value) || value.length() <= maxLength) {
             return value;
         }
@@ -137,10 +140,14 @@ public final class StringUtils {
      * @param delimiter The delimiter
      * @param others    The other strings
      * @return The resulting string.
+     * @implNote A {@code null} value is ignored, only the other strings are concatenated.
      */
     public static String concat(String value, char delimiter, String... others) {
         if (others == null || others.length == 0) {
             return value;
+        }
+        if (value == null) {
+            return concat(delimiter, others);
         }
         StringBuilder result = new StringBuilder(value);
         for (String other : others) {

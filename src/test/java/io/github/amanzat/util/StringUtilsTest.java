@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static io.github.amanzat.util.StringUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class StringUtilsTest {
 
@@ -84,6 +85,11 @@ class StringUtilsTest {
         assertThat(StringUtils.truncateWithMarker(str, maxLength)).isEqualTo(expected);
     }
 
+    @Test
+    void truncateWithMarkerNegativeMaxLength() {
+        assertThatIllegalArgumentException().isThrownBy(() -> StringUtils.truncateWithMarker("abc", -1));
+    }
+
     @ParameterizedTest
     @CsvSource({
             "'', 4, *, ****",
@@ -135,6 +141,10 @@ class StringUtilsTest {
 
         result = StringUtils.concat(value, ' ', "x", "y", "z");
         assertThat(result).isEqualTo(value + " x y z");
+
+        // a null value is ignored
+        result = StringUtils.concat(null, ' ', "x", "y", "z");
+        assertThat(result).isEqualTo("x y z");
     }
 
     @Test

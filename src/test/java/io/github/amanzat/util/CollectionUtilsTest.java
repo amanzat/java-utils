@@ -8,6 +8,7 @@ import java.util.List;
 
 import static io.github.amanzat.util.StringUtils.EMPTY_STRING;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class CollectionUtilsTest {
 
@@ -42,5 +43,13 @@ class CollectionUtilsTest {
     @Test
     void chunkifyEmpty() {
         assertThat(CollectionUtils.chunkify(Collections.emptyIterator(), 5)).isEmpty();
+    }
+
+    @Test
+    void chunkifyInvalidSize() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> CollectionUtils.chunkify(Collections.emptyIterator(), 0));
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> CollectionUtils.chunkify(Collections.emptyIterator(), -1));
     }
 }
