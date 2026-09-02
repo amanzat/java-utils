@@ -1,0 +1,74 @@
+# Opens the next development version after a release, by bumping the version and adding the -SNAPSHOT suffix back.
+
+name: Prepare next version
+
+on:
+  workflow_dispatch:
+    inputs:
+      increment:
+        description: 'Which version part to increment'
+        required: true
+        default: patch
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+env:
+  VERSIONS_PLUGIN: org.codehaus.mojo:versions-maven-plugin:2.21.0
+  HELP_PLUGIN: org.apache.maven.plugins:maven-help-plugin:3.5.2
+
+jobs:
+  prepare:
+    name: Prepare next version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Check the dispatched revision is still the head of dev
+        run: |
+          head=$(git ls-remote origin refs/heads/dev | cut -f1)
+          if [ "$head" != "$GITHUB_SHA" ]; then
+            echo "::error::dev has moved on: dispatched $GITHUB_SHA, head is $head"
+            exit 1
+          fi
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v6
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Check the current version is a released one
+        run: |
+          current=$(mvn -B -ntp -q $HELP_PLUGIN:evaluate -Dexpression=project.version -DforceStdout)
+          case "$current" in
+            *-SNAPSHOT) echo "::error::the version is already $current, release it before preparing the next one"; exit 1 ;;
+          esac
+          echo "current version is $current"
+
+      - name: Set the next development version
+        run: |
+          # the index counts from the left, so 1 is the major and 2 the minor; lesser parts become 0
+          case "${{ inputs.increment }}" in
+            major) index="-DnextSnapshotIndexToIncrement=1" ;;
+            minor) index="-DnextSnapshotIndexToIncrement=2" ;;
+            *)     index="" ;;
+          esac
+          mvn -B -ntp $VERSIONS_PLUGIN:set -DnextSnapshot=true $index -DgenerateBackupPoms=false
+
+      - name: Commit the next development version
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "prepare next release"
+          git push origin HEAD:dev
