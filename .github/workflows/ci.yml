@@ -41,7 +41,7 @@ jobs:
       - name: Check whether the version is a snapshot
         id: version
         run: |
-          version=$(mvn -B -ntp -q $HELP_PLUGIN:evaluate -Dexpression=project.version -DforceStdout)
+          version=$(mvn -B -ntp -q ${HELP_PLUGIN}:evaluate -Dexpression=project.version -DforceStdout)
           case "$version" in
             *-SNAPSHOT) snapshot=true ;;
             *)          snapshot=false ;;
