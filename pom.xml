@@ -6,7 +6,7 @@
 
     <groupId>io.github.amanzat</groupId>
     <artifactId>java-utils</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
+    <version>0.0.4</version>
     <name>java-utils</name>
     <description>A simple, lightweight and well-tested utility library.</description>
     <url>https://github.com/amanzat/java-utils</url>
