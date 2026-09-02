@@ -141,10 +141,6 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven-surefire-plugin.version}</version>
                     <configuration>
-                        <argLine>
-                            --add-opens=java.base/java.lang=ALL-UNNAMED
-                            --add-opens=java.base/java.security=ALL-UNNAMED
-                        </argLine>
                         <argLine>@{surefire.jacoco.args}</argLine>
                     </configuration>
                 </plugin>

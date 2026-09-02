@@ -38,7 +38,7 @@ jobs:
           gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
       - name: Build
-        run: mvn -B -ntp package --file pom.xml
+        run: mvn -B -ntp verify --file pom.xml
       - name: Publish
         if: >
           github.event_name == 'workflow_dispatch' &&
