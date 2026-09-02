@@ -50,7 +50,7 @@ jobs:
 
       - name: Check the current version is a released one
         run: |
-          current=$(mvn -B -ntp -q ${HELP_PLUGIN}:evaluate -Dexpression=project.version -DforceStdout)
+          current=$(mvn -B -ntp -q "${HELP_PLUGIN}:evaluate" -Dexpression=project.version -DforceStdout)
           case "$current" in
             *-SNAPSHOT) echo "::error::the version is already $current, release it before preparing the next one"; exit 1 ;;
           esac
@@ -58,13 +58,13 @@ jobs:
 
       - name: Set the next development version
         run: |
-          # the index counts from the left, so 1 is the major and 2 the minor; lesser parts become 0
+          # the index counts from the left; an array so that patch passes no argument at all
           case "${{ inputs.increment }}" in
-            major) index="-DnextSnapshotIndexToIncrement=1" ;;
-            minor) index="-DnextSnapshotIndexToIncrement=2" ;;
-            *)     index="" ;;
+            major) index=(-DnextSnapshotIndexToIncrement=1) ;;
+            minor) index=(-DnextSnapshotIndexToIncrement=2) ;;
+            *)     index=() ;;
           esac
-          mvn -B -ntp ${VERSIONS_PLUGIN}:set -DnextSnapshot=true $index -DgenerateBackupPoms=false
+          mvn -B -ntp "${VERSIONS_PLUGIN}:set" -DnextSnapshot=true "${index[@]}" -DgenerateBackupPoms=false
 
       - name: Commit the next development version
         run: |

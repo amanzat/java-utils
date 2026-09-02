@@ -35,13 +35,13 @@ jobs:
           fi
 
       - name: Check the changelog has release notes
-        # a forgotten changelog fails here, before anything is built, changed or published
+        # fails before anything is built, changed or published
         id: changelog
         run: python3 .github/scripts/release-notes.py check
 
       - name: Check the previous release tag exists
         run: |
-          # the new compare link starts at the latest release in the changelog, which has to be a real tag
+          # the new compare link starts at this tag, so it has to exist
           previous="v${{ steps.changelog.outputs.previous }}"
           if ! git ls-remote --exit-code --tags origin "refs/tags/$previous" >/dev/null 2>&1; then
             echo "::error::the changelog's latest release is ${{ steps.changelog.outputs.previous }}, but tag $previous does not exist"
@@ -63,7 +63,7 @@ jobs:
       - name: Resolve the release version
         id: release
         run: |
-          current=$(mvn -B -ntp -q ${HELP_PLUGIN}:evaluate -Dexpression=project.version -DforceStdout)
+          current=$(mvn -B -ntp -q "${HELP_PLUGIN}:evaluate" -Dexpression=project.version -DforceStdout)
           case "$current" in
             *-SNAPSHOT) ;;
             *) echo "::error::the version is $current, releasing needs a -SNAPSHOT version"; exit 1 ;;
@@ -82,7 +82,7 @@ jobs:
           fi
 
       - name: Set the release version
-        run: mvn -B -ntp ${VERSIONS_PLUGIN}:set -DremoveSnapshot=true -DgenerateBackupPoms=false
+        run: mvn -B -ntp "${VERSIONS_PLUGIN}:set" -DremoveSnapshot=true -DgenerateBackupPoms=false
 
       - name: Date the changelog and bump the readme
         run: python3 .github/scripts/release-notes.py apply "${{ steps.release.outputs.version }}" "$(date -u +%F)"
@@ -109,7 +109,7 @@ jobs:
         run: git push origin HEAD:dev "${{ steps.release.outputs.tag }}"
 
       - name: Create the GitHub release
-        # after the push, so the tag the release points at already exists on the remote
+        # after the push, so the tag already exists on the remote
         run: |
           python3 - "${{ steps.release.outputs.version }}" <<'PY' > release-notes.md
           import sys

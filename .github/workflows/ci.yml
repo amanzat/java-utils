@@ -13,7 +13,7 @@ on:
     branches: [ "dev" ]
   pull_request:
     branches: [ "dev" ]
-  # allows publishing a snapshot by hand, since the version bump commits are pushed by the bot and trigger nothing
+  # lets a snapshot be published by hand: bot pushes trigger nothing
   workflow_dispatch:
 
 permissions:
@@ -41,7 +41,7 @@ jobs:
       - name: Check whether the version is a snapshot
         id: version
         run: |
-          version=$(mvn -B -ntp -q ${HELP_PLUGIN}:evaluate -Dexpression=project.version -DforceStdout)
+          version=$(mvn -B -ntp -q "${HELP_PLUGIN}:evaluate" -Dexpression=project.version -DforceStdout)
           case "$version" in
             *-SNAPSHOT) snapshot=true ;;
             *)          snapshot=false ;;
@@ -52,7 +52,7 @@ jobs:
   snapshot:
     name: Publish snapshot
     needs: build
-    # only for commits on dev, and only while the version still carries the -SNAPSHOT suffix
+    # only on dev, and only while the version is a -SNAPSHOT
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/dev' && needs.build.outputs.snapshot == 'true'
     runs-on: ubuntu-latest
     concurrency:
