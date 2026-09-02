@@ -63,13 +63,7 @@ The jar declares `Automatic-Module-Name: io.github.amanzat.util`, so a modular p
 requires io.github.amanzat.util;
 ```
 
-## Upgrading from 0.0.2
+## Changes
 
-- **Java 21 is now required.** Running the jar on Java 17 fails with `UnsupportedClassVersionError`.
-- **The module name changed** from `java.utils`, which was derived from the file name, to
-  `io.github.amanzat.util`. A modular project has to update its `requires` clause.
-- **Invalid arguments now fail fast.** `CollectionUtils.chunkify` and `IOUtils.copy` reject a
-  non-positive size, and `StringUtils.truncateWithMarker` rejects a negative maximum length, with
-  an `IllegalArgumentException` instead of hanging or throwing from inside the JDK.
-- **More arguments are tolerated.** `ExceptionUtils.getCause`, `StringUtils.concat` and
-  `IOUtils.toInputStream` accept a `null` where they previously threw a `NullPointerException`.
+See the [changelog](CHANGELOG.md) for what changed in each release, including what to expect when
+upgrading from an earlier version.
