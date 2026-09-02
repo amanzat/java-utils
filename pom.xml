@@ -37,13 +37,13 @@
         <maven-compiler.source>${java.version}</maven-compiler.source>
         <maven-compiler.target>${java.version}</maven-compiler.target>
 
-        <lombok.version>1.18.42</lombok.version>
-        <slf4j.version>2.0.17</slf4j.version>
+        <lombok.version>1.18.48</lombok.version>
+        <slf4j.version>2.0.18</slf4j.version>
 
         <!-- test dependencies -->
-        <junit-jupiter.version>5.12.2</junit-jupiter.version>
+        <junit-jupiter.version>5.14.4</junit-jupiter.version>
         <assertj-version>3.27.7</assertj-version>
-        <mockito.version>5.17.0</mockito.version>
+        <mockito.version>5.23.0</mockito.version>
 
         <!-- plugins -->
         <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
