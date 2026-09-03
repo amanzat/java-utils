@@ -1,16 +1,15 @@
 package io.github.amanzat.util;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Miscellaneous {@link Throwable} utility methods and constants.
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ExceptionUtils {
+
+    private ExceptionUtils() {
+    }
 
     /**
      * Returns the first {@link Throwable throwable} of the specified type in the exception chain if exists, {@code null} otherwise.

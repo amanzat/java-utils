@@ -1,13 +1,12 @@
 package io.github.amanzat.util;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-
 /**
  * Miscellaneous {@link Object} utility methods.
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ObjectUtils {
+
+    private ObjectUtils() {
+    }
 
     /**
      * Performs an unchecked cast for the specified object.

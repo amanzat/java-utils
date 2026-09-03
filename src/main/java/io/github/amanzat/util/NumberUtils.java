@@ -1,7 +1,5 @@
 package io.github.amanzat.util;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
@@ -10,8 +8,10 @@ import java.math.BigDecimal;
  * Miscellaneous {@link Number} utility methods and constants.
  */
 @Slf4j
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class NumberUtils {
+
+    private NumberUtils() {
+    }
 
     /**
      * Safely parses the specified string value to a {@link BigDecimal} ignoring nulls and blank strings.

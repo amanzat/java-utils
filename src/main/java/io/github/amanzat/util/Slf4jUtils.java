@@ -1,15 +1,15 @@
 package io.github.amanzat.util;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.event.Level;
 
 /**
  * Miscellaneous utility methods for Slf4J.
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class Slf4jUtils {
+
+    private Slf4jUtils() {
+    }
 
     /**
      * Simple logging based on the specified parameters.

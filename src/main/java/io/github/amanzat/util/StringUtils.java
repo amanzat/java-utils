@@ -1,15 +1,14 @@
 package io.github.amanzat.util;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-
 import java.util.Arrays;
 
 /**
  * Miscellaneous {@link String} utility methods and constants.
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class StringUtils {
+
+    private StringUtils() {
+    }
 
     /**
      * The empty {@link String} constant.

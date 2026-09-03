@@ -1,8 +1,5 @@
 package io.github.amanzat.util;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-
 import java.util.*;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -10,8 +7,10 @@ import java.util.stream.StreamSupport;
 /**
  * Miscellaneous collections related utilities.
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class CollectionUtils {
+
+    private CollectionUtils() {
+    }
 
     /**
      * Returns an optional containing the first element of the list if any.

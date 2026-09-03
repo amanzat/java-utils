@@ -1,8 +1,5 @@
 package io.github.amanzat.util;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,8 +10,10 @@ import java.util.Objects;
 /**
  * Miscellaneous I/O streams related utilities.
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class IOUtils {
+
+    private IOUtils() {
+    }
 
     /**
      * The default buffer size ({@value}) to use in copy methods.

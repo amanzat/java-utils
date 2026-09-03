@@ -1,13 +1,12 @@
 package io.github.amanzat.util;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-
 /**
  * Miscellaneous comparable utility methods.
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ComparableUtils {
+
+    private ComparableUtils() {
+    }
 
     /**
      * Does a safe comparison of two {@link Comparable} objects accounting for nulls.

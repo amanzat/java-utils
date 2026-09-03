@@ -1,7 +1,5 @@
 package io.github.amanzat.util;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.CountDownLatch;
@@ -11,8 +9,10 @@ import java.util.concurrent.Semaphore;
  * Miscellaneous {@link Thread} utility methods.
  */
 @Slf4j
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ThreadUtils {
+
+    private ThreadUtils() {
+    }
 
     /**
      * Safely sleeps the current thread for the specified number of millis.
