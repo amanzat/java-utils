@@ -7,6 +7,10 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+_Nothing user facing yet._
+
+## [0.0.5] - 2026-09-03
+
 ### Fixed
 
 - The published Javadoc no longer advertises a public no-argument constructor on the utility
@@ -67,7 +71,8 @@ Central. Its only change, the migration to Java 21, is part of this release._
   `ExceptionUtils`, `FileUtils`, `IOUtils`, `NumberUtils`, `ObjectUtils`, `Slf4jUtils`,
   `StringUtils` and `ThreadUtils`.
 
-[Unreleased]: https://github.com/amanzat/java-utils/compare/v0.0.4...dev
+[Unreleased]: https://github.com/amanzat/java-utils/compare/v0.0.5...dev
+[0.0.5]: https://github.com/amanzat/java-utils/compare/v0.0.4...v0.0.5
 [0.0.4]: https://github.com/amanzat/java-utils/compare/v0.0.2...v0.0.4
 [0.0.2]: https://github.com/amanzat/java-utils/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/amanzat/java-utils/releases/tag/v0.0.1

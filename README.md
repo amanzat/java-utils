@@ -23,7 +23,7 @@ ___
 <dependency>
     <groupId>io.github.amanzat</groupId>
     <artifactId>java-utils</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
 </dependency>
 ```
 
