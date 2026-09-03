@@ -38,7 +38,7 @@ jobs:
       - name: Check whether the version is a snapshot
         id: version
         run: |
-          version=$(mvn -B -ntp -q help:evaluate -Dexpression=project.version -DforceStdout)
+          version=$(python3 -c 'import xml.etree.ElementTree as ET; print(ET.parse("pom.xml").getroot().findtext("{http://maven.apache.org/POM/4.0.0}version"))')
           case "$version" in
             *-SNAPSHOT) snapshot=true ;;
             *)          snapshot=false ;;
