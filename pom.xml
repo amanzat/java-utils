@@ -85,8 +85,9 @@
                 <configuration>
                     <publishingServerId>central</publishingServerId>
                     <autoPublish>true</autoPublish>
-                    <!-- fail the build unless the deployment actually reaches Maven Central -->
-                    <waitUntil>published</waitUntil>
+                    <!-- validation is what can fail; publishing afterwards is Central's job and
+                         waiting for it timed out 9 minutes short on 0.0.5 -->
+                    <waitUntil>validated</waitUntil>
                 </configuration>
             </plugin>
         </plugins>
