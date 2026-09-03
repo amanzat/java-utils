@@ -7,7 +7,18 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-_Nothing user facing yet._
+### Changed
+
+- The compiler is configured with `release` rather than `source` and `target`, so the build now
+  fails if code calls an API newer than Java 21 instead of producing a jar that throws
+  `NoSuchMethodError` on a Java 21 runtime.
+- Publishing to Maven Central waits only for the deployment to be validated, not for it to finish
+  publishing. Waiting for the publish exceeded the plugin's 30 minute cap during the 0.0.5 release,
+  failing the build after the artifact had already been accepted.
+- The Maven plugins used by the release workflows are declared in the pom, so their versions are
+  updated automatically rather than by hand.
+- The release workflows read the project version straight from the pom instead of invoking
+  `maven-help-plugin`, which removes a plugin from the release path.
 
 ## [0.0.5] - 2026-09-03
 
