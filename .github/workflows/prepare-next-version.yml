@@ -22,10 +22,6 @@ concurrency:
   group: release
   cancel-in-progress: false
 
-env:
-  VERSIONS_PLUGIN: org.codehaus.mojo:versions-maven-plugin:2.21.0
-  HELP_PLUGIN: org.apache.maven.plugins:maven-help-plugin:3.5.2
-
 jobs:
   prepare:
     name: Prepare next version
@@ -50,7 +46,7 @@ jobs:
 
       - name: Check the current version is a released one
         run: |
-          current=$(mvn -B -ntp -q "${HELP_PLUGIN}:evaluate" -Dexpression=project.version -DforceStdout)
+          current=$(mvn -B -ntp -q help:evaluate -Dexpression=project.version -DforceStdout)
           case "$current" in
             *-SNAPSHOT) echo "::error::the version is already $current, release it before preparing the next one"; exit 1 ;;
           esac
@@ -64,7 +60,7 @@ jobs:
             minor) index=(-DnextSnapshotIndexToIncrement=2) ;;
             *)     index=() ;;
           esac
-          mvn -B -ntp "${VERSIONS_PLUGIN}:set" -DnextSnapshot=true "${index[@]}" -DgenerateBackupPoms=false
+          mvn -B -ntp versions:set -DnextSnapshot=true "${index[@]}" -DgenerateBackupPoms=false
 
       - name: Commit the next development version
         run: |
