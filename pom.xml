@@ -210,6 +210,8 @@
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>${maven-javadoc-plugin.version}</version>
                     <configuration>
+                        <!-- a javadoc warning means the published documentation is wrong -->
+                        <failOnWarnings>true</failOnWarnings>
                         <tags>
                             <tag>
                                 <name>implNote</name>

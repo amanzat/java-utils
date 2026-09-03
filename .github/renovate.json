@@ -17,5 +17,15 @@
       "matchUpdateTypes": ["major"],
       "dependencyDashboardApproval": true
     }
+  ],
+  "customManagers": [
+    {
+      "description": "the slf4j-api version in the README install snippet, kept in step with the pom",
+      "customType": "regex",
+      "managerFilePatterns": ["/^README\\.md$/"],
+      "matchStrings": ["<artifactId>slf4j-api</artifactId>\\s*<version>(?<currentValue>[^<]+)</version>"],
+      "depNameTemplate": "org.slf4j:slf4j-api",
+      "datasourceTemplate": "maven"
+    }
   ]
 }
